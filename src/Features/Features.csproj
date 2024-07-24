@@ -16,6 +16,8 @@
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<RootNamespace>ChrisMavrommatis.Features</RootNamespace>
 		<RepositoryType>git</RepositoryType>
+		<Description>A library providing a simple feature management for .NET applications.</Description>
+		<PackageTags>Feature Management;Feature Toggle;Configuration;Feature Flags;Feature Manager</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
