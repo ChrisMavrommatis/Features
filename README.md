@@ -29,22 +29,18 @@ Feature.Manager = new FeatureManagerConfiguration()
 Be sure to have loaded the configuration from a file or other source beforehand
 ```csharp
 builder.Configuration
-			.AddJsonFile("Features.json", optional: false, reloadOnChange: true)
-			.AddJsonFile($"Features.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+	.AddJsonFile("Features.json", optional: false, reloadOnChange: true)
+	.AddJsonFile($"Features.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 ```
 
 The json should look like this
 
 ```json
-?{
-	"Features": {
-		"Feature1": {
-			"Enabled": true
-		},
-		"Feature2": {
-			"Enabled": false
-		}
-	}
+{
+  "Features": {
+    "Feature1": true
+    "Feature2": false
+  }
 }
 ```
 
