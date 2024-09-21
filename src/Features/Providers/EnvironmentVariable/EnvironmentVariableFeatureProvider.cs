@@ -10,9 +10,15 @@ internal class EnvironmentVariableFeatureProvider : IFeatureProvider
         if (variable is null)
             return FeatureResult.NotFound;
 
-        if (bool.TrueString == variable)
+        var isTruthy = bool.TrueString == variable;
+        if (isTruthy)
             return FeatureResult.Enabled;
 
-        return FeatureResult.Disabled;
+        var isFalsy = bool.FalseString == variable;
+        if (isFalsy)
+            return FeatureResult.Disabled;
+
+        return FeatureResult.NotFound;
     }
+
 }

@@ -23,7 +23,7 @@ internal class ConfigurationFeatureProvider : IFeatureProvider
             return EvaluateResult(booleanValue);
 
         if (value is string stringValue)
-            return EvaluateResult(bool.TrueString == stringValue);
+            return EvaluateResult(stringValue);
 
         return FeatureResult.NotFound;
     }
@@ -34,5 +34,18 @@ internal class ConfigurationFeatureProvider : IFeatureProvider
             return FeatureResult.Enabled;
 
         return FeatureResult.Disabled;
+    }
+
+    private static FeatureResult EvaluateResult(string value)
+    {
+        var isTruthy = bool.TrueString == value;
+        if (isTruthy)
+            return FeatureResult.Enabled;
+
+        var isFalsy = bool.FalseString == value;
+        if (isFalsy)
+            return FeatureResult.Disabled;
+
+        return FeatureResult.NotFound;
     }
 }
