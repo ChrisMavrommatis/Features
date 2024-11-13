@@ -5,11 +5,8 @@ on:
     types: [ "published" ]
 
 jobs:
-  build:
+  prepare:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -17,13 +14,21 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: '9.0.x'
 
+      - name: Restore dependencies
+        run: dotnet restore
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-framework: [ 'net8.0', 'net9.0' ]
+    steps:
       - name: Restore dependencies
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore --framework ${{ matrix.dotnet-framework }}
   pack_and_publish:
     runs-on: ubuntu-latest
     steps:
