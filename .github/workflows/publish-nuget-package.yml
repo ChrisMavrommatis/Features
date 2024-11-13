@@ -4,11 +4,8 @@ on:
   release:
     types: [ "published" ]
 
-env:
-  solution_path: './Features.sln'
-
 jobs:
-  prepare:
+  build_and_publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -18,24 +15,19 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0.x'
-  build:
-    runs-on: ubuntu-latest
-    needs: prepare
-    strategy:
-      matrix:
-        dotnet-framework: [ 'net8.0', 'net9.0' ]
-    steps:
+          
       - name: Restore dependencies
-        run: dotnet restore ${{ env.solution_path }}
+        run: dotnet restore
+        
+      - name: Build .Net 8.0
+        run: dotnet build --configuration Release --no-restore --framework net8.0
 
-      - name: Build
-        run: dotnet build ${{ env.solution_path }} --configuration Release --no-restore --framework ${{ matrix.dotnet-framework }}
-  pack_and_publish:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+      - name: Build .Net 9.0
+        run: dotnet build --configuration Release --no-restore --framework net9.0
+        
       - name: Pack
-        run: dotnet pack ${{ env.solution_path }} --configuration Release --no-build --output ./nupkgs
+        run: dotnet pack  --configuration Release --no-build --output ./nupkgs
+        
       - name: Publish to NuGet
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
