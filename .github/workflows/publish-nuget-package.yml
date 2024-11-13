@@ -5,7 +5,7 @@ on:
     types: [ "published" ]
 
 env:
-  solution_path: 'Features.sln'
+  solution_path: './Features.sln'
 
 jobs:
   prepare:
