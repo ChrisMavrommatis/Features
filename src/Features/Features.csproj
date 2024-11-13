@@ -10,7 +10,7 @@
 		<Authors>Chris Mavrommatis</Authors>
 		<PackageProjectUrl>https://github.com/ChrisMavrommatis/Features</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ChrisMavrommatis/Features</RepositoryUrl>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
 		<AssemblyName>ChrisMavrommatis.Features</AssemblyName>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
